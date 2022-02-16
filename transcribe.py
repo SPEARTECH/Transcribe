@@ -3,7 +3,6 @@ from os import path
 from pydub import AudioSegment
 import os
 from moviepy.editor import *
-import json
 
 
 selection = input('Input mp4 file to convert? (Y/N): ')
@@ -104,7 +103,7 @@ for file in list_of_files:
         with sr.AudioFile(file) as source:
                 audio = r.record(source)  # read the entire audio file    
                 with open(json_file, 'r') as json_content:
-                        GOOGLE_CLOUD_SPEECH_CREDENTIALS = json.loads(json_content.read())
+                        GOOGLE_CLOUD_SPEECH_CREDENTIALS = json_content.read()
         with open('transcript.txt', 'a+') as f:
                 f.writelines('\n' + r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS))
         count += 1
